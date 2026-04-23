@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <title>Правописно предизвикателство</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Правописно предизвикателство</h1>
+
+    <!-- Начало -->
+    <div id="startScreen">
+        <input type="text" id="playerName" placeholder="Въведи име">
+        <button onclick="startGame()">Старт</button>
+    </div>
+
+    <!-- Игра -->
+    <div id="gameScreen" class="hidden">
+        <p id="question"></p>
+
+        <input type="text" id="answer" placeholder="Напиши думата">
+
+        <div class="buttons">
+            <button onclick="checkAnswer()">Провери</button>
+            <button onclick="useHint()">Жокер</button>
+        </div>
+
+        <p id="feedback"></p>
+        <p>Точки: <span id="score">0</span></p>
+    </div>
+
+    <!-- Край -->
+    <div id="endScreen" class="hidden">
+        <h2>Край!</h2>
+        <p id="finalScore"></p>
+        <button onclick="location.reload()">Играй отново</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
