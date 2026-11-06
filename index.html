@@ -1,44 +1,345 @@
+
 <!DOCTYPE html>
 <html lang="bg">
 <head>
-    <meta charset="UTF-8">
-    <title>Правописно предизвикателство</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learning Kingdom | Кралство на знанието</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --purple:#7356a8;
+  --dark:#382c55;
+  --gold:#e8b85b;
+  --cream:#fffaf1;
+  --pink:#f4dce8;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  font-family:'Nunito',sans-serif;
+  color:var(--dark);
+  background:#f7f1ff;
+}
+header {
+  background:rgba(255,255,255,.94);
+  padding:17px 6%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  box-shadow:0 4px 20px #40305a12;
+}
+.logo {
+  font-size:21px;
+  font-weight:900;
+  color:var(--purple);
+}
+.logo span { color:var(--gold); }
+nav a {
+  text-decoration:none;
+  color:var(--dark);
+  margin-left:20px;
+  font-weight:800;
+}
+.hero {
+  background:linear-gradient(120deg,#59417e,#9075bd);
+  color:white;
+  padding:65px 8%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:25px;
+  overflow:hidden;
+}
+.hero h1 {
+  font-size:clamp(34px,5vw,58px);
+  line-height:1.12;
+  margin:0 0 15px;
+}
+.hero p { font-size:18px; opacity:.9; }
+.hero-art {
+  font-size:clamp(100px,17vw,180px);
+  filter:drop-shadow(0 12px 12px #24153655);
+}
+.primary {
+  border:0;
+  background:var(--gold);
+  color:#48365b;
+  padding:15px 27px;
+  border-radius:16px;
+  font-size:17px;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 5px 0 #bd8e3f;
+}
+.primary:hover { transform:translateY(-2px); }
+main {
+  max-width:1100px;
+  margin:auto;
+  padding:35px 20px 60px;
+}
+.welcome {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:15px;
+  margin-bottom:30px;
+}
+.welcome h2 { margin:0; font-size:27px; }
+.stats {
+  display:flex;
+  gap:12px;
+}
+.stat {
+  background:white;
+  padding:12px 18px;
+  border-radius:16px;
+  font-weight:900;
+  box-shadow:0 5px 18px #40305a0c;
+}
+.section-title { margin:35px 0 18px; }
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:18px;
+}
+.category {
+  padding:23px;
+  border-radius:23px;
+  min-height:170px;
+  border:2px solid transparent;
+  cursor:pointer;
+  transition:.2s;
+}
+.category:hover {
+  transform:translateY(-5px);
+  border-color:#b7a0db;
+}
+.category .emoji { font-size:43px; }
+.category h3 { margin:10px 0 4px; font-size:21px; }
+.category p { margin:0; font-size:14px; }
+.cat1 { background:#e9e0fb; }
+.cat2 { background:#e0f0e7; }
+.cat3 { background:#dfeafb; }
+.cat4 { background:#f9e6d5; }
+.game {
+  background:white;
+  border-radius:27px;
+  padding:30px;
+  max-width:650px;
+  margin:35px auto;
+  box-shadow:0 12px 40px #40305a12;
+  text-align:center;
+}
+.hidden { display:none !important; }
+.progress {
+  height:10px;
+  background:#eee9f5;
+  border-radius:20px;
+  overflow:hidden;
+  margin:20px 0;
+}
+#bar {
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,#9b7bd1,#e8b85b);
+  transition:.3s;
+}
+.question {
+  font-size:clamp(27px,5vw,38px);
+  font-weight:900;
+  margin:25px 0;
+}
+.answers {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+.answer {
+  background:#f0eafb;
+  color:var(--dark);
+  border:2px solid transparent;
+  border-radius:16px;
+  padding:18px 10px;
+  font-family:inherit;
+  font-size:19px;
+  font-weight:900;
+  cursor:pointer;
+}
+.answer:hover { border-color:#9a7bc8; }
+.answer:disabled { cursor:default; opacity:.8; }
+#feedback {
+  min-height:35px;
+  font-size:19px;
+  font-weight:900;
+  margin:20px 0;
+}
+footer {
+  text-align:center;
+  padding:30px;
+  color:#8a7b9d;
+}
+@keyframes pop {
+  0% {transform:scale(.8)}
+  70% {transform:scale(1.08)}
+  100% {transform:scale(1)}
+}
+.pop { animation:pop .35s ease; }
+@media(max-width:600px) {
+  nav { display:none; }
+  .hero { padding:45px 7%; }
+  .hero-art { font-size:85px; }
+  .answers { grid-template-columns:1fr; }
+  .stats { width:100%; }
+}
+</style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Правописно предизвикателство</h1>
+<header>
+  <div class="logo">👑 LEARNING <span>KINGDOM</span></div>
+  <nav>
+    <a href="#home">Начало</a>
+    <a href="#games">Игри</a>
+    <a href="#challenge">Предизвикателство</a>
+  </nav>
+</header>
 
-    <!-- Начало -->
-    <div id="startScreen">
-        <input type="text" id="playerName" placeholder="Въведи име">
-        <button onclick="startGame()">Старт</button>
+<section class="hero" id="home">
+  <div>
+    <p>✨ ТВОЕТО НОВО ПРИКЛЮЧЕНИЕ ЗАПОЧВА ТУК</p>
+    <h1>Добре дошли<br>в Кралството!</h1>
+    <p>Учи, играй и откривай нови светове!</p>
+    <button class="primary" onclick="document.getElementById('games').scrollIntoView({behavior:'smooth'})">
+      Открий игрите →
+    </button>
+  </div>
+  <div class="hero-art">🏰</div>
+</section>
+
+<main>
+  <section class="welcome">
+    <div>
+      <h2>Здравей, малък откривателю! 🌟</h2>
+      <p>Готов ли си за нови знания?</p>
     </div>
-
-    <!-- Игра -->
-    <div id="gameScreen" class="hidden">
-        <p id="question"></p>
-
-        <input type="text" id="answer" placeholder="Напиши думата">
-
-        <div class="buttons">
-            <button onclick="checkAnswer()">Провери</button>
-            <button onclick="useHint()">Жокер</button>
-        </div>
-
-        <p id="feedback"></p>
-        <p>Точки: <span id="score">0</span></p>
+    <div class="stats">
+      <div class="stat">⭐ <span id="totalScore">0</span> точки</div>
+      <div class="stat">🏆 <span id="completed">0</span> верни</div>
     </div>
+  </section>
 
-    <!-- Край -->
-    <div id="endScreen" class="hidden">
-        <h2>Край!</h2>
-        <p id="finalScore"></p>
-        <button onclick="location.reload()">Играй отново</button>
+  <h2 class="section-title" id="games">🗺️ Избери своето приключение</h2>
+
+  <div class="grid">
+    <div class="category cat1" onclick="startGame()">
+      <div class="emoji">📖</div>
+      <h3>Български език</h3>
+      <p>Думи, правопис и изречения</p>
     </div>
-</div>
+    <div class="category cat2" onclick="startGame()">
+      <div class="emoji">🔢</div>
+      <h3>Математика</h3>
+      <p>Числа и забавни задачи</p>
+    </div>
+    <div class="category cat3" onclick="startGame()">
+      <div class="emoji">💻</div>
+      <h3>Компютърен свят</h3>
+      <p>Открий тайните на технологиите</p>
+    </div>
+    <div class="category cat4" onclick="startGame()">
+      <div class="emoji">🧩</div>
+      <h3>Логически загадки</h3>
+      <p>Мисли, откривай, побеждавай</p>
+    </div>
+  </div>
 
-<script src="script.js"></script>
+  <section class="game hidden" id="challenge">
+    <h2>⚔️ Мисия: Изпитанието на знанието</h2>
+    <p id="progress">Въпрос 1 от 8</p>
+    <div class="progress"><div id="bar"></div></div>
+    <div class="question" id="question"></div>
+    <div class="answers" id="answers"></div>
+    <div id="feedback">Избери верния отговор! 🌟</div>
+    <button class="primary hidden" id="next" onclick="nextQuestion()">Следващ въпрос →</button>
+  </section>
+</main>
+
+<footer>
+  👑 Learning Kingdom · Учи с усмивка, мечтай смело!
+</footer>
+
+<script>
+const questions = [
+ {q:"Колко е 5 + 3?",a:["6","7","8","9"],c:"8"},
+ {q:"Колко е 10 - 4?",a:["5","6","7","8"],c:"6"},
+ {q:"Коя дума е правилно написана?",a:["ученик","ученек","ученикк","ученикъ"],c:"ученик"},
+ {q:"Колко дни има една седмица?",a:["5","6","7","8"],c:"7"},
+ {q:"Кое устройство използваме за писане?",a:["Монитор","Клавиатура","Мишка","Принтер"],c:"Клавиатура"},
+ {q:"Колко е 6 + 6?",a:["10","11","12","13"],c:"12"},
+ {q:"Коя е първата буква в азбуката?",a:["Б","В","А","Г"],c:"А"},
+ {q:"Кое устройство показва изображението?",a:["Монитор","Мишка","Клавиатура","Колонка"],c:"Монитор"}
+];
+let current=0,score=0,answered=false,totalScore=0,completed=0;
+
+function startGame(){
+ current=0;score=0;
+ document.getElementById("challenge").classList.remove("hidden");
+ document.getElementById("challenge").scrollIntoView({behavior:"smooth"});
+ showQuestion();
+}
+function showQuestion(){
+ answered=false;
+ document.getElementById("progress").textContent=`Въпрос ${current+1} от ${questions.length}`;
+ document.getElementById("bar").style.width=(current/questions.length*100)+"%";
+ document.getElementById("question").textContent=questions[current].q;
+ document.getElementById("feedback").textContent="Избери верния отговор! 🌟";
+ document.getElementById("next").classList.add("hidden");
+ const area=document.getElementById("answers");
+ area.innerHTML="";
+ questions[current].a.forEach(a=>{
+  const b=document.createElement("button");
+  b.className="answer";
+  b.textContent=a;
+  b.onclick=()=>checkAnswer(a,b);
+  area.appendChild(b);
+ });
+}
+function checkAnswer(answer,button){
+ if(answered)return;
+ answered=true;
+ document.querySelectorAll(".answer").forEach(b=>b.disabled=true);
+ if(answer===questions[current].c){
+  score++;totalScore++;completed++;
+  document.getElementById("feedback").textContent="🎉 БРАВО! Точно така!";
+  button.style.background="#d9f3df";
+  button.style.borderColor="#70b982";
+ }else{
+  document.getElementById("feedback").textContent="💜 Добър опит! Продължавай!";
+  button.style.background="#f8dfe5";
+ }
+ document.getElementById("totalScore").textContent=totalScore;
+ document.getElementById("completed").textContent=completed;
+ document.getElementById("next").classList.remove("hidden");
+}
+function nextQuestion(){
+ current++;
+ if(current>=questions.length){
+  document.getElementById("bar").style.width="100%";
+  document.getElementById("progress").textContent="Мисията е завършена!";
+  document.getElementById("question").textContent="🏆 Поздравления!";
+  document.getElementById("answers").innerHTML="";
+  document.getElementById("feedback").textContent=`Спечели ${score} от ${questions.length} възможни точки! ⭐`;
+  document.getElementById("next").textContent="Играй отново ↻";
+  document.getElementById("next").onclick=startGame;
+ }else{
+  document.getElementById("next").textContent="Следващ въпрос →";
+  showQuestion();
+ }
+}
+</script>
 </body>
 </html>
+
